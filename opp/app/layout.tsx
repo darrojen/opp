@@ -4,8 +4,16 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import CustomScrollbar from "@/components/ui/ScrollNav";
+import { Toaster } from "react-hot-toast";
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
+// ─── Theme Provider ───────────────────────────────────────
+import { ThemeProvider } from "next-themes";
+import ClientNavbar from "@/components/layout/ClientNavbar";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,10 +36,80 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", inter.variable)}>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <CustomScrollbar />
-        {children}
+    <html
+      lang="en"
+      // Important: suppressHydrationWarning prevents mismatch warnings
+      suppressHydrationWarning
+      className={cn("font-sans", inter.variable)}
+    >
+      <body
+        className={cn(
+          geistSans.variable,
+          geistMono.variable,
+          "antialiased min-h-screen",
+          // We remove hardcoded bg/text here → controlled via CSS variables + theme
+        )}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"           // start in dark mode (matches your original style)
+          enableSystem                  // respect system preference
+          disableTransitionOnChange     // prevents ugly flash during theme switch
+        >
+          {/* Toast container */}
+          <Toaster
+            position="top-center"
+            reverseOrder={false}
+            gutter={12}
+            containerClassName="mt-4"
+            toastOptions={{
+              duration: 4500,
+              style: {
+                background: "hsl(var(--background))",
+                color: "hsl(var(--foreground))",
+                border: "1px solid hsl(var(--border))",
+                borderRadius: "12px",
+                padding: "16px 20px",
+                maxWidth: "420px",
+                boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.4)",
+              },
+              success: {
+                duration: 5000,
+                iconTheme: {
+                  primary: "#f97316",
+                  secondary: "#ffffff",
+                },
+                style: {
+                  borderColor: "#f97316",
+                },
+              },
+              error: {
+                duration: 6000,
+                iconTheme: {
+                  primary: "#ef4444",
+                  secondary: "#ffffff",
+                },
+                style: {
+                  borderColor: "#ef4444",
+                },
+              },
+              loading: {
+                style: {
+                  background: "hsl(var(--muted))",
+                  borderColor: "hsl(var(--border))",
+                },
+              },
+            }}
+          />
+                <ClientNavbar />
+          
+
+          <CustomScrollbar />
+          
+
+          {/* Main content */}
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

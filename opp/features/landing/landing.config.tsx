@@ -7,6 +7,7 @@ import Features from '@/features/landing/components/Features';
 import Statistics from '@/features/landing/components/Statistics';
 import TrendingOpportunities from '@/features/landing/components/TrendingOpportunities';
 import FeaturedOpportunities from '@/features/landing/components/FeaturedOpportunities';
+import Parteners from '@/features/landing/components/Parteners';
 import CTASection from '@/features/landing/components/CTASection';
 import Footer from '@/features/landing/components/Footer';
 import Navbar from '@/features/landing/components/Navbar';
@@ -21,8 +22,11 @@ export const LandingPageConfig: FC = () => {
         <Features />
         <Statistics />
         <TrendingOpportunities />
-        <FeaturedOpportunities />
+        {/* <FeaturedOpportunities /> */}
+       
+
         <CTASection />
+         <Parteners />
         <Footer />
       </Box>
     </>

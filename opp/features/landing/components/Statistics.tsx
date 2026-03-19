@@ -1,51 +1,138 @@
-// src/components/landing/Statistics.tsx
+
+"use client";
+
+import Box from "@/components/ui/box";
+import { useEffect, useRef, useState } from "react";
+
+type Stat = {
+  value: number;
+  suffix?: string;
+  prefix?: string;
+  label: string;
+  description: string;
+};
+
+const stats: Stat[] = [
+  {
+    value: 12500,
+    suffix: "+",
+    label: "Active Users",
+    description: "Students, developers & young professionals",
+  },
+  {
+    value: 340,
+    suffix: "+",
+    label: "Organizations & Partners",
+    description: "Universities, startups, tech companies",
+  },
+  {
+    value: 1.2,
+    prefix: "$",
+    suffix: "M+",
+    label: "Total Value Unlocked",
+    description: "Prizes, stipends, salaries & grants facilitated",
+  },
+  {
+    value: 4800,
+    suffix: "+",
+    label: "Applications Submitted",
+    description: "Directly through the platform",
+  },
+];
+
+function CountUp({ target }: { target: number }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const duration = 900;
+    const increment = target / (duration / 16);
+
+    const counter = setInterval(() => {
+      start += increment;
+
+      if (start >= target) {
+        setCount(target);
+        clearInterval(counter);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 16);
+
+    return () => clearInterval(counter);
+  }, [target]);
+
+  return <>{count.toLocaleString()}</>;
+}
+
 export default function Statistics() {
-  const stats = [
-    {
-      value: "12,500+",
-      label: "Active Users",
-      description: "Students, developers & young professionals",
-    },
-    {
-      value: "340+",
-      label: "Organizations & Partners",
-      description: "Universities, startups, tech companies",
-    },
-    {
-      value: "$1.2M+",
-      label: "Total Value Unlocked",
-      description: "Prizes, stipends, salaries & grants facilitated",
-    },
-    {
-      value: "4,800+",
-      label: "Applications Submitted",
-      description: "Directly through the platform",
-    },
-  ];
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true);
+      },
+      { threshold: 0.35 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className="py-20 bg-white dark:bg-gray-900">
-      <div className="container mx-auto px-6 lg:px-8">
-        <h2 className="mb-16 text-center text-4xl font-bold tracking-tight sm:text-5xl">
-          OpportunityHub by the Numbers
-        </h2>
+    <Box as="section"
+      ref={ref}
+      className="py-24 bg-white dark:bg-gray-900"
+    >
+      <Box as="div" className="container mx-auto px-6 lg:px-8">
 
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+
+
+        {/* Grid */}
+        <Box as="div" className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat, i) => (
-            <div key={i} className="text-center">
-              <div className="mb-4 text-5xl font-extrabold text-indigo-600 dark:text-indigo-400">
-                {stat.value}
-              </div>
-              <h3 className="mb-2 text-2xl font-semibold">{stat.label}</h3>
-              <p className="text-gray-600 dark:text-gray-400">{stat.description}</p>
-            </div>
-          ))}
-        </div>
+            <Box as="div"
+              key={i}
+              className={`
+              group text-center
+              rounded-xl
+              p-8
+              transition-all duration-700
+              cursor-pointer
+              hover:-translate-y-2
+              hover:shadow-lg
+              ${
+                visible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
+              }
+              `}
+              style={{ transitionDelay: `${i * 120}ms` }}
+            >
+              {/* Number */}
+              <Box as="div" className="mb-4 text-5xl font-extrabold text-indigo-600 dark:text-indigo-400">
+                {stat.prefix}
+                {visible && <CountUp target={stat.value} />}
+                {stat.suffix}
+              </Box>
 
-        <p className="mt-12 text-center text-lg text-gray-600 dark:text-gray-300">
-          These numbers are growing every day — join the movement and be part of the next milestone.
-        </p>
-      </div>
-    </section>
+              {/* Label */}
+              <Box as="h3" className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
+                {stat.label}
+              </Box>
+
+              {/* Description */}
+              <Box as="p" className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                {stat.description}
+              </Box>
+            </Box>
+          ))}
+        </Box>
+
+      </Box>
+    </Box>
   );
 }

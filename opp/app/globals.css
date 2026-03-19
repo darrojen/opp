@@ -275,3 +275,104 @@ body::-webkit-scrollbar {
 
 .up { transform: rotate(-135deg); }
 .down { transform: rotate(45deg); }
+
+
+@keyframes slideUp {
+  from {
+    transform: translateY(120%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.35s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.4s ease-out forwards;
+}
+
+@keyframes slideUpFromBottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0.7;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slideUpFromBottom {
+  animation: slideUpFromBottom 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+
+/* Slide animations (enter/exit) */
+.slide-up {
+  transform: translateY(100%);
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.slide-down {
+  animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0.85; }
+  to   { transform: translateY(0);    opacity: 1;    }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(0);    opacity: 1;    }
+  to   { transform: translateY(100%); opacity: 0.85; }
+}
+
+/* 3D flip helpers */
+.perspective-\[1200px\] {
+  perspective: 1200px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-0 {
+  transform: rotateY(0deg);
+}
+
+.rotate-y--180 {
+  transform: rotateY(-180deg);
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Flip trigger classes – applied to parent to coordinate both sides */
+.flip-to-login .rotate-y--180,
+.flip-to-signup .rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.flip-to-login .rotate-y-0,
+.flip-to-signup .rotate-y-0 {
+  transform: rotateY(0deg);
+}
