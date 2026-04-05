@@ -1,75 +1,153 @@
-// components/ui/HoneycombLogo.tsx
-interface HoneycombLogoProps {
-  size?: number
-  color?: string
-  speed?: number
-  text?: string
+
+
+// // components/ui/Honeycomb.tsx
+
+// interface HoneycombProps {
+//   size?: number;
+//   color?: string;
+// }
+
+// export default function Honeycomb({
+//   size = 24,
+//   color = "#f97316",
+// }: HoneycombProps) {
+
+//   // scale factor (based on original 24px design)
+//   const scale = size / 24;
+
+//   const hexes = [
+//     { left: -28, top: 0 },
+//     { left: -14, top: 22 },
+//     { left: 14, top: 22 },
+//     { left: 28, top: 0 },
+//     { left: 14, top: -22 },
+//     { left: -14, top: -22 },
+//   ];
+
+//   return (
+//     <div
+//       style={{
+//         position: "relative",
+//         width: size * 3,
+//         height: size * 3,
+//         display: "inline-block",
+//       }}
+//     >
+//       {hexes.map((hex, i) => {
+//         const bgColor = i === 4 ? "#000000" : color;
+
+//         return (
+//           <div
+//             key={i}
+//             style={{
+//               position: "absolute",
+//               left: hex.left * scale,
+//               top: hex.top * scale,
+//               width: 24 * scale,
+//               height: 12 * scale,
+//               background: bgColor,
+//               marginTop: 6 * scale,
+//             }}
+//           >
+//             {/* top */}
+//             <div
+//               style={{
+//                 position: "absolute",
+//                 top: -6 * scale,
+//                 left: 0,
+//                 right: 0,
+//                 borderLeft: `${12 * scale}px solid transparent`,
+//                 borderRight: `${12 * scale}px solid transparent`,
+//                 borderBottom: `${6 * scale}px solid ${bgColor}`,
+//               }}
+//             />
+//             {/* bottom */}
+//             <div
+//               style={{
+//                 position: "absolute",
+//                 bottom: -6 * scale,
+//                 left: 0,
+//                 right: 0,
+//                 borderLeft: `${12 * scale}px solid transparent`,
+//                 borderRight: `${12 * scale}px solid transparent`,
+//                 borderTop: `${6 * scale}px solid ${bgColor}`,
+//               }}
+//             />
+//           </div>
+//         );
+//       })}
+//     </div>
+//   );
+// }
+
+interface HoneycombProps {
+  size?: number;
+  color?: string;
 }
 
-export default function HoneycombLogo({
-  size = 36,
+export default function Honeycomb({
+  size = 12, // default now 12
   color = "#f97316",
-  speed = 2.1,
-  text = "opp",
-}: HoneycombLogoProps) {
-  const hexes = [
-    { x: -18, y: 0, delay: 0 },
-    { x: -9, y: 15, delay: 0.1 },
-    { x: 9, y: 15, delay: 0.2 },
-    { x: 18, y: 0, delay: 0.3 },
-    { x: 9, y: -15, delay: 0.4 }, // 👈 black
-    { x: -9, y: -15, delay: 0.5 },
-  ]
+}: HoneycombProps) {
+  const scale = size / 24;
 
-  const hexPath = "M12 2 L22 8 L22 20 L12 26 L2 20 L2 8 Z"
+  const hexes = [
+    { left: -28, top: 0 },
+    { left: -14, top: 22 },
+    { left: 14, top: 22 },
+    { left: 28, top: 0 },
+    { left: 14, top: -22 },
+    { left: -14, top: -22 },
+  ];
 
   return (
-    <div className="flex items-center gap-2">
-      {/* SVG ICON */}
-      <svg
-        width={size}
-        height={size}
-        viewBox="-35 -35 70 70"
-        fill="none"
-      >
-        {hexes.map((hex, i) => {
-          const fill = i === 4 ? "#000000" : color
+    <div
+      style={{
+        position: "relative",
+        width: 60 * scale,   // tighter fit
+        height: 60 * scale,  // tighter fit
+        display: "inline-block",
+      }}
+    >
+      {hexes.map((hex, i) => {
+        const bgColor = i === 4 ? "#000000" : color;
 
-          return (
-            <g key={i} transform={`translate(${hex.x}, ${hex.y})`}>
-              <path
-                d={hexPath}
-                fill={fill}
-                style={{
-                  transformOrigin: "center",
-                  animation: `honeycomb ${speed}s infinite`,
-                  animationDelay: `${hex.delay}s`,
-                }}
-              />
-            </g>
-          )
-        })}
-
-        <style>
-          {`
-          @keyframes honeycomb {
-            0%,20%,80%,100% {
-              opacity: 0;
-              transform: scale(0);
-            }
-            30%,70% {
-              opacity: 1;
-              transform: scale(1);
-            }
-          }
-        `}
-        </style>
-      </svg>
-
-      {/* TEXT */}
-      <span className="text-lg font-semibold tracking-tight text-black">
-        {text}
-      </span>
+        return (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              left: hex.left * scale,
+              top: hex.top * scale,
+              width: 24 * scale,
+              height: 12 * scale,
+              background: bgColor,
+              marginTop: 6 * scale,
+            }}
+          >
+            {/* top */}
+            <div
+              style={{
+                position: "absolute",
+                top: -6 * scale,
+                borderLeft: `${12 * scale}px solid transparent`,
+                borderRight: `${12 * scale}px solid transparent`,
+                borderBottom: `${6 * scale}px solid ${bgColor}`,
+              }}
+            />
+            {/* bottom */}
+            <div
+              style={{
+                position: "absolute",
+                bottom: -6 * scale,
+                borderLeft: `${12 * scale}px solid transparent`,
+                borderRight: `${12 * scale}px solid transparent`,
+                borderTop: `${6 * scale}px solid ${bgColor}`,
+              }}
+            />
+          </div>
+        );
+      })}
     </div>
-  )
+  );
 }

@@ -1,3 +1,5 @@
+// import Honeycomb from "@/components/logo/HoneycombLogo";
+
 export default function CommunityUp() {
   return (
     <div>
@@ -13,6 +15,12 @@ export default function CommunityUp() {
           </div>
         ))}
       </div>
+
+      {/* <div className="mt-20 pl-30">
+
+                    <Honeycomb size={24} color="#f97316" />
+      </div> */}
+      
     </div>
   )
 }

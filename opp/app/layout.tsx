@@ -4,11 +4,13 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import CustomScrollbar from "@/components/ui/ScrollNav";
-import { Toaster } from "react-hot-toast";
+// import { Toaster } from "react-hot-toast";
 
 // ─── Theme Provider ───────────────────────────────────────
 import { ThemeProvider } from "next-themes";
 import ClientNavbar from "@/components/layout/ClientNavbar";
+import { Toaster } from "sonner";
+import Footer from "@/features/landing/components/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -47,69 +49,21 @@ export default function RootLayout({
           geistSans.variable,
           geistMono.variable,
           "antialiased min-h-screen",
-          // We remove hardcoded bg/text here → controlled via CSS variables + theme
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"           // start in dark mode (matches your original style)
-          enableSystem                  // respect system preference
-          disableTransitionOnChange     // prevents ugly flash during theme switch
-        >
-          {/* Toast container */}
-          <Toaster
-            position="top-center"
-            reverseOrder={false}
-            gutter={12}
-            containerClassName="mt-4"
-            toastOptions={{
-              duration: 4500,
-              style: {
-                background: "hsl(var(--background))",
-                color: "hsl(var(--foreground))",
-                border: "1px solid hsl(var(--border))",
-                borderRadius: "12px",
-                padding: "16px 20px",
-                maxWidth: "420px",
-                boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.4)",
-              },
-              success: {
-                duration: 5000,
-                iconTheme: {
-                  primary: "#f97316",
-                  secondary: "#ffffff",
-                },
-                style: {
-                  borderColor: "#f97316",
-                },
-              },
-              error: {
-                duration: 6000,
-                iconTheme: {
-                  primary: "#ef4444",
-                  secondary: "#ffffff",
-                },
-                style: {
-                  borderColor: "#ef4444",
-                },
-              },
-              loading: {
-                style: {
-                  background: "hsl(var(--muted))",
-                  borderColor: "hsl(var(--border))",
-                },
-              },
-            }}
-          />
-                <ClientNavbar />
+        
+         
+          <Toaster position="top-right"  />
           
 
           <CustomScrollbar />
           
+                <ClientNavbar />
 
-          {/* Main content */}
+          
           {children}
-        </ThemeProvider>
+                <Footer />
+        
       </body>
     </html>
   );
