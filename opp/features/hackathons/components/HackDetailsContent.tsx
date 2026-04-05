@@ -28,10 +28,10 @@ export default function HackDetailsContent({ description, bullets, outline }: Pr
   const paragraphs = description.split("\n\n").filter(Boolean);
 
   return (
-    <Box as="div" className="max-w-[1200px] mx-auto px-6 py-8 flex gap-10 items-start">
+    <Box as="div" className="max-w-300 mx-auto px-6 py-8 flex gap-10 items-start">
 
       {/* Outline sidebar */}
-      <Box as="aside" className="hidden lg:block w-44 flex-shrink-0 pt-1">
+      <Box as="aside" className="hidden lg:block w-44 shrink-0 pt-1">
         <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-widest mb-3">Outline</p>
         {outline.length === 0 ? (
           <p className="text-sm text-gray-400 italic">no chapters</p>
@@ -56,7 +56,7 @@ export default function HackDetailsContent({ description, bullets, outline }: Pr
           <ul className="space-y-2 pt-1">
             {bullets.map(b => (
               <li key={b} className="flex items-start gap-2 text-sm text-gray-700">
-                <svg className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
                 </svg>
                 {b}

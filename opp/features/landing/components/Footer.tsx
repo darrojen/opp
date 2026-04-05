@@ -1,5 +1,6 @@
+import Honeycomb from '@/components/logo/HoneycombLogo';
 import Box from '@/components/ui/box';
-import {  ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -14,9 +15,14 @@ export default function Footer() {
         <Box as="div" className="grid gap-12 lg:grid-cols-5">
           {/* Logo + Social */}
           <Box as="div" className="space-y-6 lg:col-span-2">
-            <Box as="h3" className="text-xl font-bold">
-              Opp
-            </Box>
+            <Link href="/" className="flex items-center gap-2">
+              <Box as="div" className="mt-7">
+                <Honeycomb size={12} color="#f97316" />
+              </Box>
+              <Box as="p" className=" text-[23px]">
+                Opphex
+              </Box>
+            </Link>
 
             <Box
               as="p"
@@ -35,7 +41,6 @@ export default function Footer() {
               </Box>
 
               <Box as="div" className="flex gap-4">
-               
                 <Link
                   href="https://x.com/yourhandle"
                   className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
@@ -101,7 +106,6 @@ export default function Footer() {
               </Box>
             </Box>
           </Box>
-
           {/* About */}
           <Box as="div">
             <Box as="h4" className="mb-4 font-semibold">
@@ -113,13 +117,19 @@ export default function Footer() {
               className="space-y-3 text-sm text-gray-600 dark:text-gray-400"
             >
               <Box as="li">
-                <Link href="/about" className='hover:underline'>About Opp</Link>
+                <Link href="/about" className="hover:underline">
+                  About Opp
+                </Link>
               </Box>
               <Box as="li">
-                <Link href="/blog" className='hover:underline'>Blog</Link>
+                <Link href="/blog" className="hover:underline">
+                  Blog
+                </Link>
               </Box>
               <Box as="li">
-                <Link href="/changelog" className='hover:underline'>Changelog</Link>
+                <Link href="/changelog" className="hover:underline">
+                  Changelog
+                </Link>
               </Box>
             </Box>
           </Box>
@@ -135,13 +145,19 @@ export default function Footer() {
               className="space-y-3 text-sm text-gray-600 dark:text-gray-400"
             >
               <Box as="li">
-                <Link href="/opportunities" className='hover:underline'>Explore Opportunities</Link>
+                <Link href="/opportunities" className="hover:underline">
+                  Explore Opportunities
+                </Link>
               </Box>
               <Box as="li">
-                <Link href="/post-opportunity" className='hover:underline'>Post Opportunity</Link>
+                <Link href="/post-opportunity" className="hover:underline">
+                  Post Opportunity
+                </Link>
               </Box>
               <Box as="li">
-                <Link href="/for-organizations" className='hover:underline'>Partner With Us</Link>
+                <Link href="/for-organizations" className="hover:underline">
+                  Partner With Us
+                </Link>
               </Box>
             </Box>
           </Box>
@@ -157,13 +173,22 @@ export default function Footer() {
               className="space-y-3 text-sm text-gray-600 dark:text-gray-400"
             >
               <Box as="li">
-                <Link href="/contact" className='hover:underline'>Message Us</Link>
+                <Link href="/contact" className="hover:underline">
+                  Message Us
+                </Link>
               </Box>
               <Box as="li">
-                <Link href="/report" className='hover:underline'>Report Issue</Link>
+                <Link href="/report" className="hover:underline">
+                  Report Issue
+                </Link>
               </Box>
               <Box as="li">
-                <Link href="mailto:hello@opportunityhub.dev" className='hover:underline'>Email</Link>
+                <Link
+                  href="mailto:hello@opportunityhub.dev"
+                  className="hover:underline"
+                >
+                  Email
+                </Link>
               </Box>
               <Box as="li">
                 {' '}
@@ -175,15 +200,19 @@ export default function Footer() {
                 </Link>
               </Box>
               <Box as="li">
-                <Link href="mailto:hello@opportunityhub.dev"                   className="flex items-center gap-1 hover:underline"
->
+                <Link
+                  href="mailto:hello@opportunityhub.dev"
+                  className="flex items-center gap-1 hover:underline"
+                >
                   Discord
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
               </Box>
               <Box as="li">
-                <Link href="mailto:hello@opportunityhub.dev"                   className="flex items-center gap-1 hover:underline"
->
+                <Link
+                  href="mailto:hello@opportunityhub.dev"
+                  className="flex items-center gap-1 hover:underline"
+                >
                   Youtube <ArrowUpRight className="h-4 w-4" />
                 </Link>
               </Box>
@@ -196,9 +225,7 @@ export default function Footer() {
           as="div"
           className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-8 text-sm text-gray-500 md:flex-row dark:border-gray-800"
         >
-          <p>
-            © {new Date().getFullYear()} Opp. All rights reserved.
-          </p>
+          <p>© {new Date().getFullYear()} OppHex. All rights reserved.</p>
 
           <Box as="div" className="flex gap-6">
             <Link href="/code-of-conduct">Code of conduct</Link>
